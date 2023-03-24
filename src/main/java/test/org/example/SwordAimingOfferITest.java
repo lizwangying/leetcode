@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 /**
- * @Desc :
+ * @Desc : 剑指 Offer test cases
  * @Author : Liz</p>
  * @Date : 2023/3/22</p>
  */
@@ -63,7 +63,6 @@ class SwordAimingOfferITest {
     public static Stream<Arguments> fibParamsProvider() {
         return Stream.of(
                 arguments(2, 1),
-                arguments(3, 3),
                 arguments(5, 5)
         );
     }
