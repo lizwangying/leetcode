@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Beans.ListNode;
+import org.example.Beans.TreeNode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -7,7 +9,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.example.TreeNode.initTreeNode;
+import static org.example.Beans.ListNode.initListNode;
+import static org.example.Beans.TreeNode.initTreeNode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -53,20 +56,8 @@ class SwordAimingOfferITest {
         );
     }
 
-    @DisplayName("剑指 Offer 10- I. 斐波那契数列")
-    @ParameterizedTest(name = "输入：{0},期望输出：{1}")
-    @MethodSource("fibParamsProvider")
-    void fib(int n, int exp) {
-        assertEquals(exp, sword.fib(n));
-    }
 
-    public static Stream<Arguments> fibParamsProvider() {
-        return Stream.of(
-                arguments(2, 1),
-                arguments(5, 5)
-        );
-    }
-
+    //TODO 二叉树不支持 null node 初始化
 //    @DisplayName("剑指 Offer 28. 对称的二叉树")
 //    @ParameterizedTest(name = "输入：{0}，期望输出:{1}")
 //    @MethodSource("testIsSymmetricParamsProvider")
@@ -80,4 +71,120 @@ class SwordAimingOfferITest {
 //                arguments(initTreeNode(new Integer[]{1, 2, 2, null, 3, null, 3}), false)
 //        );
 //    }
+    @DisplayName("剑指 Offer 10- I. 斐波那契数列")
+    @ParameterizedTest(name = "输入：{0},期望输出：{1}")
+    @MethodSource("fibParamsProvider")
+    void fib(int n, int exp) {
+        assertEquals(exp, sword.fib(n));
+    }
+
+    public static Stream<Arguments> fibParamsProvider() {
+        return Stream.of(
+                arguments(2, 1),
+                arguments(1, 1),
+                arguments(3, 2),
+                arguments(5, 5)
+        );
+    }
+
+    @DisplayName("剑指 Offer 10- II. 青蛙跳台阶问题")
+    @ParameterizedTest(name = "输入：{0},期望输出：{1}")
+    @MethodSource("numWaysParamsProvider")
+    void numWays(int n, int exp) {
+        assertEquals(exp, sword.numWays(n));
+        assertEquals(exp, sword.numWaysDp(n));
+    }
+
+    public static Stream<Arguments> numWaysParamsProvider() {
+        return Stream.of(
+                arguments(3, 3),
+                arguments(7, 21),
+                arguments(2, 2),
+                arguments(0, 1)
+        );
+    }
+
+    @DisplayName("剑指 Offer 63. 股票的最大利润")
+    @ParameterizedTest(name = "输入：{0},期望输出：{1}")
+    @MethodSource("maxProfitParamsProvider")
+    void maxProfit(int[] prices, int exp) {
+        assertEquals(exp, sword.maxProfit(prices));
+    }
+
+    public static Stream<Arguments> maxProfitParamsProvider() {
+        return Stream.of(
+                arguments(new int[]{7, 1, 5, 3, 6, 4}, 5),
+                arguments(new int[]{7, 6, 4, 3, 1}, 0)
+        );
+    }
+
+    @DisplayName("剑指 Offer 47. 礼物的最大价值")
+    @ParameterizedTest(name = "输入：{0},期望输出：{1}")
+    @MethodSource("maxValueParamsProvider")
+    void maxValue(int[][] grid, int exp) {
+        assertEquals(exp, sword.maxValue(grid));
+    }
+
+    public static Stream<Arguments> maxValueParamsProvider() {
+        return Stream.of(
+                arguments(new int[][]{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}}, 12)
+        );
+    }
+
+    @DisplayName("剑指 Offer 46. 把数字翻译成字符串")
+    @ParameterizedTest(name = "输入：{0},期望输出：{1}")
+    @MethodSource("translateNumParamsProvider")
+    void translateNum(int num, int exp) {
+        assertEquals(exp, sword.translateNum(num));
+    }
+
+    public static Stream<Arguments> translateNumParamsProvider() {
+        return Stream.of(
+                arguments(12258, 5)
+        );
+    }
+
+    @DisplayName("剑指 Offer 48. 最长不含重复字符的子字符串")
+    @ParameterizedTest(name = "输入：{0},期望输出：{1}")
+    @MethodSource("lengthOfLongestSubstringParamsProvider")
+    void lengthOfLongestSubstring(String s, int exp) {
+        assertEquals(exp, sword.lengthOfLongestSubstring(s));
+    }
+
+    public static Stream<Arguments> lengthOfLongestSubstringParamsProvider() {
+        return Stream.of(
+                arguments("abcabcbb", 3),
+                arguments("pwwkew", 3),
+                arguments("bbbbb", 1)
+        );
+    }
+
+    @DisplayName("剑指 Offer 18. 删除链表的节点")
+    @ParameterizedTest(name = "输入：{0},期望输出：{2}")
+    @MethodSource("deleteNodeParamsProvider")
+    void deleteNode(ListNode head, int val, ListNode exp) {
+        assertEquals(exp, sword.deleteNode(head, val));
+    }
+
+    public static Stream<Arguments> deleteNodeParamsProvider() {
+        return Stream.of(
+                arguments(initListNode(new int[]{4, 5, 1, 9}), 5, initListNode(new int[]{4, 1, 9})),
+                arguments(initListNode(new int[]{4, 5, 1, 9}), 1, initListNode(new int[]{4, 5, 9}))
+        );
+    }
+
+
+    @DisplayName("剑指 Offer 22. 链表中倒数第k个节点")
+    @ParameterizedTest(name = "输入：{0},期望输出：{2}")
+    @MethodSource("getKthFromEndParamsProvider")
+    void getKthFromEnd(ListNode head, int k, ListNode exp) {
+        assertEquals(exp, sword.getKthFromEnd(head, k));
+    }
+
+    public static Stream<Arguments> getKthFromEndParamsProvider() {
+        return Stream.of(
+//                arguments(initListNode(new int[]{1, 2, 3, 4, 5, 6}), 3, initListNode(new int[]{4, 5})),
+                arguments(initListNode(new int[]{1, 2, 3, 4, 5}), 2, initListNode(new int[]{4, 5}))
+        );
+    }
 }
