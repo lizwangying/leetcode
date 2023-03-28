@@ -29,8 +29,9 @@ public class ListNode {
         }
         ListNode dummyNode = new ListNode(-1);
         ListNode preNode = dummyNode;
-        for (int number : numbers) {
-            preNode.next = new ListNode(number);
+        for (int i = 0; i < numbers.length; i++) {
+            ListNode currNode = new ListNode(numbers[i]);
+            preNode.next = currNode;
             preNode = preNode.next;
         }
         return dummyNode.next;
@@ -53,7 +54,7 @@ public class ListNode {
             }
             tmp = tmp.next;
         }
-        sb.append(val).append("]");
+        sb.append(tmp.val).append("]");
         return sb.toString();
     }
 

@@ -71,6 +71,7 @@ class SwordAimingOfferITest {
 //                arguments(initTreeNode(new Integer[]{1, 2, 2, null, 3, null, 3}), false)
 //        );
 //    }
+
     @DisplayName("剑指 Offer 10- I. 斐波那契数列")
     @ParameterizedTest(name = "输入：{0},期望输出：{1}")
     @MethodSource("fibParamsProvider")
@@ -187,4 +188,56 @@ class SwordAimingOfferITest {
                 arguments(initListNode(new int[]{1, 2, 3, 4, 5}), 2, initListNode(new int[]{4, 5}))
         );
     }
+
+    @DisplayName("剑指 Offer 25. 合并两个排序的链表")
+    @ParameterizedTest(name = "输入：{0},{1},期望输出：{2}")
+    @MethodSource("mergeTwoListsParamsProvider")
+    void mergeTwoLists(ListNode l1, ListNode l2, ListNode exp) {
+        assertEquals(exp, sword.mergeTwoLists(l1, l2));
+    }
+
+    public static Stream<Arguments> mergeTwoListsParamsProvider() {
+        return Stream.of(
+                arguments(
+                        initListNode(new int[]{2, 4, 6, 8, 10}),
+                        initListNode(new int[]{1, 3, 5, 7, 9}),
+                        initListNode(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
+                ),
+                arguments(
+                        initListNode(new int[]{1, 2, 4}),
+                        initListNode(new int[]{1, 3, 4}),
+                        initListNode(new int[]{1, 1, 2, 3, 4})
+                )
+        );
+    }
+
+    @DisplayName("剑指 Offer 52. 两个链表的第一个公共节点")
+    @ParameterizedTest(name = "输入：{0},{1},期望输出：{2}")
+    @MethodSource("getIntersectionNodeParamsProvider")
+    void getIntersectionNode(ListNode l1, ListNode l2, ListNode exp) {
+        ListNode res = sword.getIntersectionNode(l1, l2);
+        assertEquals(exp, res, "实际输出：" + res);
+    }
+
+    public static Stream<Arguments> getIntersectionNodeParamsProvider() {
+        return Stream.of(
+                arguments(
+                        initListNode(new int[]{0, 9, 1, 2, 4}),
+                        initListNode(new int[]{3, 2, 4}),
+                        initListNode(new int[]{2, 4})
+                ),
+                arguments(
+                        initListNode(new int[]{4, 1, 8, 4, 5}),
+                        initListNode(new int[]{5, 0, 1, 8, 4, 5}),
+                        initListNode(new int[]{8, 4, 5})
+                ),
+                arguments(
+                        initListNode(new int[]{2, 6, 8}),
+                        initListNode(new int[]{5, 0}),
+                        null)
+
+        );
+    }
+
+
 }
